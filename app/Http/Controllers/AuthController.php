@@ -12,7 +12,7 @@ class AuthController extends Controller
     {
         $fields = $request->validate([
             'name'      => 'required',
-            'email'     => 'required|email|unique:user',
+            'email'     => 'required|email|unique:users',
             'password'  => 'required|confirmed',
         ]);
 
@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $$user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
 
             return [
                 'message' => 'Invalid Credentials'

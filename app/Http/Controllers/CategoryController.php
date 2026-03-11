@@ -20,17 +20,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $fields = $request->validate([
-            'name' => 'required|string|unique:categories,name',
-            'description'  => 'nullable|string'
+            'name' => 'required|string|unique:categories,name|max:255',
+            'description' => 'nullable|string'
         ]);
 
-        // dd($request->user());
+        $category = $request->user()->categories()->create($fields);
 
-        $category = Category::create($fields);
-        $fields['user_id'] = auth()->id();
-        return $category;
+        return response()->json([
+            'message' => 'Category created successfully',
+            'category' => $category
+        ], 201);
     }
 
     /**

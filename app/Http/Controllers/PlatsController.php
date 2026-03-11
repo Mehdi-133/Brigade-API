@@ -13,7 +13,7 @@ class PlatsController extends Controller
      */
     public function index()
     {
-        //
+        return Plats::all();
     }
 
     /**
@@ -21,7 +21,16 @@ class PlatsController extends Controller
      */
     public function store(StorePlatsRequest $request)
     {
-        //
+        $field = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        $plats = Plats::create($field);
+        return response()->json(['message' => 'plat created successfully']);
     }
 
     /**
@@ -29,7 +38,10 @@ class PlatsController extends Controller
      */
     public function show(Plats $plats)
     {
-        //
+        return [
+            'plat' => $plats,
+            'category' => $plats->category
+        ];
     }
 
     /**
@@ -37,7 +49,16 @@ class PlatsController extends Controller
      */
     public function update(UpdatePlatsRequest $request, Plats $plats)
     {
-        //
+        $field = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        $plats->update($field);
+        return response()->json(['message' => 'plat updated successfully']);
     }
 
     /**
@@ -45,6 +66,7 @@ class PlatsController extends Controller
      */
     public function destroy(Plats $plats)
     {
-        //
+        $plats->delete();
+        return ["message" => "plats deleted"];
     }
 }

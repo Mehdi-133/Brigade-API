@@ -13,7 +13,7 @@ class PlatsPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PlatsPolicy
      */
     public function view(User $user, Plats $plats): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PlatsPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return  $user->role === "admin";
     }
 
     /**
@@ -37,7 +37,7 @@ class PlatsPolicy
      */
     public function update(User $user, Plats $plats): bool
     {
-        return false;
+        return  $user->id === $plats->category_id || $user->role = "admin";
     }
 
     /**
@@ -45,7 +45,7 @@ class PlatsPolicy
      */
     public function delete(User $user, Plats $plats): bool
     {
-        return false;
+        return  $user->id === $plats->category_id || $user->role = "admin";
     }
 
     /**
@@ -53,7 +53,7 @@ class PlatsPolicy
      */
     public function restore(User $user, Plats $plats): bool
     {
-        return false;
+        return  $user->id === $plats->category_id || $user->role = "admin";
     }
 
     /**

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Plats;
 use App\Http\Requests\StorePlatsRequest;
 use App\Http\Requests\UpdatePlatsRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PlatsController extends Controller
 {
+     use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -21,6 +23,7 @@ class PlatsController extends Controller
      */
     public function store(StorePlatsRequest $request)
     {
+        $this->authorize('create', Plats::class);
         $field = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -49,6 +52,7 @@ class PlatsController extends Controller
      */
     public function update(UpdatePlatsRequest $request, Plats $plats)
     {
+        $this->authorize('update', $plats);
         $field = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -66,6 +70,7 @@ class PlatsController extends Controller
      */
     public function destroy(Plats $plats)
     {
+        $this->authorize('delete', $plats);
         $plats->delete();
         return ["message" => "plats deleted"];
     }

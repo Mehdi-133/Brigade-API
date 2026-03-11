@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Plats;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CategoryController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -20,6 +25,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',  Category::class);
+        
         $fields = $request->validate([
             'name' => 'required|string|unique:categories,name|max:255',
             'description' => 'nullable|string'
@@ -46,6 +53,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->authorize('update', $category);
         $fields = $request->validate([
             'name' => 'required|string|unique:categories,name',
             'description'  => 'nullable|string'
@@ -60,6 +68,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->authorize('delete', $category);
         $category->delete();
         return ["message" => "category deleted"];
     }

@@ -15,6 +15,7 @@ class Plats extends Model
         'description',
         'price',
         'image',
+        'category_id'
     ];
 
     public function category(){

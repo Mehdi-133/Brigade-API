@@ -29,7 +29,8 @@ class PlatsPolicy
      */
     public function create(User $user): bool
     {
-        return  $user->role === "admin";
+        return  $user->isAdmin();
+        
     }
 
     /**
@@ -37,7 +38,7 @@ class PlatsPolicy
      */
     public function update(User $user, Plats $plats): bool
     {
-        return  $user->id === $plats->category_id || $user->role = "admin";
+        return  $user->id === $plats->category_id || $user->isAdmin();
     }
 
     /**
@@ -45,7 +46,7 @@ class PlatsPolicy
      */
     public function delete(User $user, Plats $plats): bool
     {
-        return  $user->id === $plats->category_id || $user->role = "admin";
+        return  $user->id === $plats->category_id || $user->isAdmin();
     }
 
     /**
@@ -53,7 +54,7 @@ class PlatsPolicy
      */
     public function restore(User $user, Plats $plats): bool
     {
-        return  $user->id === $plats->category_id || $user->role = "admin";
+        return  $user->id === $plats->category_id || $user->isAdmin();
     }
 
     /**

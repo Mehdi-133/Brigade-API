@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable , HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -49,8 +50,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function Category(){
-        return $this->hasMany(Category::class);
+    public function isAdmin():bool
+    {
+        return $this->role === 'admin';
+    }
 
+
+    public function Category()
+    {
+        return $this->hasMany(Category::class);
     }
 }

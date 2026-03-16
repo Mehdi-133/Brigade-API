@@ -22,7 +22,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'dietary_tags'
+    ];
+
+    public const DIETARY_TAGS = [
+        'vegan',
+        'vegetarian',
+        'halal',
+        'kosher',
+        'gluten_free',
+        'dairy_free'
     ];
 
     /**
@@ -46,11 +56,12 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'dietary_tags' => 'array',
 
         ];
     }
 
-    public function isAdmin():bool
+    public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }

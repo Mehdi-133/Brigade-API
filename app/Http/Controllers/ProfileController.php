@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
+
         return response()->json([
             'name' => $user->name,
             'email' => $user->email,
@@ -59,8 +59,4 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function delete()
-    {
-        //
-    }
 }

@@ -68,6 +68,7 @@ class PlatsController extends Controller
     )]
     public function store(StorePlatsRequest $request)
     {
+            
         $this->authorize('create', Plats::class);
         $field = $request->validate([
             'name' => 'required|string|max:255',

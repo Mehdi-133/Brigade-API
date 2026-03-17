@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 class Plats extends Model
 {
     /** @use HasFactory<\Database\Factories\PlatsFactory> */
@@ -18,7 +19,13 @@ class Plats extends Model
         'category_id'
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
+    }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class);
     }
 }

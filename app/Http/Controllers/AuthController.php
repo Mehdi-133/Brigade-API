@@ -34,6 +34,7 @@ class AuthController extends Controller
     )]
     public function register(Request $request)
     {
+        
         $isFirstUser = User::count() === 0;
         $fields = $request->validate([
             'name'      => 'required',

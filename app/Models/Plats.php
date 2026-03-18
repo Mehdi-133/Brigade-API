@@ -16,7 +16,8 @@ class Plats extends Model
         'description',
         'price',
         'image',
-        'category_id'
+        'category_id',
+        'is_available'
     ];
 
     public function category()
@@ -28,4 +29,5 @@ class Plats extends Model
     {
         return $this->belongsToMany(Ingredient::class);
     }
+
 }

@@ -47,7 +47,9 @@ class PlatsController extends Controller
                     new OA\Property(property: "description", type: "string", example: "Classic Italian pizza"),
                     new OA\Property(property: "price", type: "number", example: 12.99),
                     new OA\Property(property: "image", type: "string", example: "pizza.jpg"),
-                    new OA\Property(property: "category_id", type: "integer", example: 1)
+                    new OA\Property(property: "category_id", type: "integer", example: 1),
+                    new OA\Property(property: "is_available", type: "boolean")
+
                 ]
             )
         ),
@@ -68,14 +70,15 @@ class PlatsController extends Controller
     )]
     public function store(StorePlatsRequest $request)
     {
-            
+
         $this->authorize('create', Plats::class);
         $field = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'image' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'is_available' => 'boolean '
         ]);
 
         $plats = Plats::create($field);
@@ -140,7 +143,8 @@ class PlatsController extends Controller
                     new OA\Property(property: "description", type: "string"),
                     new OA\Property(property: "price", type: "number"),
                     new OA\Property(property: "image", type: "string"),
-                    new OA\Property(property: "category_id", type: "integer")
+                    new OA\Property(property: "category_id", type: "integer"),
+                    new OA\Property(property: "is_available", type: "boolean")
                 ]
             )
         ),
@@ -171,7 +175,8 @@ class PlatsController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'image' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'is_available' => 'boolean'
         ]);
 
         $plats->update($field);

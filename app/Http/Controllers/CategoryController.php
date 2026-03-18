@@ -45,7 +45,9 @@ class CategoryController extends Controller
                 required: ["name"],
                 properties: [
                     new OA\Property(property: "name", type: "string", example: "Desserts"),
-                    new OA\Property(property: "description", type: "string", example: "Sweet dishes")
+                    new OA\Property(property: "description", type: "string", example: "Sweet dishes"),
+                    new OA\Property(property: "color", type: "string", example: "blue"),
+                    new OA\Property(property: "is_active", type: "boolean", example: "true")
                 ]
             )
         ),
@@ -70,7 +72,9 @@ class CategoryController extends Controller
 
         $fields = $request->validate([
             'name' => 'required|string|unique:categories,name|max:255',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'color' => ['nullable', 'regex:/^#([A-Fa-f0-9]{6})$/'],
+            'is_active' => 'boolean'
         ]);
 
         $category = $request->user()->category()->create($fields);
@@ -133,7 +137,9 @@ class CategoryController extends Controller
                 required: ["name"],
                 properties: [
                     new OA\Property(property: "name", type: "string"),
-                    new OA\Property(property: "description", type: "string")
+                    new OA\Property(property: "description", type: "string"),
+                    new OA\Property(property: "color", type: "string", example: "blue"),
+                    new OA\Property(property: "is_active", type: "boolean", example: "true")
                 ]
             )
         ),
@@ -161,7 +167,9 @@ class CategoryController extends Controller
         $this->authorize('update', $category);
         $fields = $request->validate([
             'name' => 'required|string|unique:categories,name',
-            'description'  => 'nullable|string'
+            'description'  => 'nullable|string',
+            'color' => ['nullable', 'regex:/^#([A-Fa-f0-9]{6})$/'],
+            'is_active' => 'boolean'
         ]);
 
         $category->update($fields);

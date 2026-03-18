@@ -32,6 +32,7 @@ class IngredientController extends Controller
     public function store(Request $request)
     {
 
+        $this->authorize('create',  Ingredient::class);
         $field = $request->validate([
             'name' => ['required', 'string', 'max:255', Rule::unique('ingredients')],
             'tags' => 'nullable|array',
@@ -70,6 +71,7 @@ class IngredientController extends Controller
      */
     public function update(Request $request, Ingredient $ingredient)
     {
+        $this->authorize('update' , Ingredient::class);
         $field = $request->validate([
             'name' => ['required', 'string', 'max:255', Rule::unique('ingredients')],
             'tags' => 'nullable|array',

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Plats;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use OpenApi\Attributes as OA;
@@ -46,8 +45,8 @@ class CategoryController extends Controller
                 properties: [
                     new OA\Property(property: "name", type: "string", example: "Desserts"),
                     new OA\Property(property: "description", type: "string", example: "Sweet dishes"),
-                    new OA\Property(property: "color", type: "string", example: "blue"),
-                    new OA\Property(property: "is_active", type: "boolean", example: "true")
+                    new OA\Property(property: "color", type: "string", example: "#0000FF"),
+                    new OA\Property(property: "is_active", type: "boolean", example: true)
                 ]
             )
         ),
@@ -138,8 +137,8 @@ class CategoryController extends Controller
                 properties: [
                     new OA\Property(property: "name", type: "string"),
                     new OA\Property(property: "description", type: "string"),
-                    new OA\Property(property: "color", type: "string", example: "blue"),
-                    new OA\Property(property: "is_active", type: "boolean", example: "true")
+                    new OA\Property(property: "color", type: "string", example: "#0000FF"),
+                    new OA\Property(property: "is_active", type: "boolean", example: true)
                 ]
             )
         ),
@@ -176,7 +175,7 @@ class CategoryController extends Controller
         return response()->json([
             'message' => 'Category updated successfully',
             'category' => $category
-        ], 201);
+        ], 200);
     }
 
     #[OA\Delete(

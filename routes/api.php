@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RecommendationsController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -28,6 +29,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('plats', PlatsController::class);
 
-    Route::apiResource('profile' , ProfileController::class);
-    Route::apiResource('ingredient' , IngredientController::class);
+    Route::apiResource('profile', ProfileController::class);
+    Route::apiResource('ingredient', IngredientController::class);
+
+    Route::get('recommendations', [RecommendationsController::class, 'index']);
+    Route::post('recommendations/{plat_id}', [RecommendationsController::class, 'store']);
+    Route::get('recommendations/{recommendation}', [RecommendationsController::class, 'show']);
+    Route::put('recommendations/{recommendation}', [RecommendationsController::class, 'update']);
+    Route::delete('recommendations/{recommendation}', [RecommendationsController::class, 'destroy']);
+
 });

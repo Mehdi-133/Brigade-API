@@ -27,7 +27,11 @@ class Plats extends Model
 
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class, 'ingredient_plat', 'plat_id', 'ingredient_id');
+    }
+
+    public function recommendation(){
+        return $this->hasMany(Recommendations::class);
     }
 
 }

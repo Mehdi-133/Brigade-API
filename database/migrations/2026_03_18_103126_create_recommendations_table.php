@@ -10,10 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('recommendation', function (Blueprint $table) {
+        Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
             $table->float('score');
-            $table->string('warning_message');
+            $table->string('warning_message')->nullable();
             $table->enum('status', ['pending', 'improved', 'rejected'])->default('pending');
             $table->foreignId('plat_id')
                 ->constrained('plats')
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('recommendation');
+        Schema::dropIfExists('recommendations');
     }
 };

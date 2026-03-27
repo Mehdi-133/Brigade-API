@@ -34,8 +34,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('recommendations', [RecommendationsController::class, 'index']);
     Route::post('recommendations/{plat_id}', [RecommendationsController::class, 'store']);
-    Route::get('recommendations/{recommendation}', [RecommendationsController::class, 'show']);
-    Route::put('recommendations/{recommendation}', [RecommendationsController::class, 'update']);
-    Route::delete('recommendations/{recommendation}', [RecommendationsController::class, 'destroy']);
+    Route::get('recommendations/{plat_id}', [RecommendationsController::class, 'show']);
 
 });

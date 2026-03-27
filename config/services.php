@@ -18,6 +18,7 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -34,5 +35,12 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+
+    'groq' => [
+        'key' => env('GROQ_API_KEY'),
+        'model' => env('GROQ_MODEL', 'llama3-8b-8192'),
+
+    ],
+
 
 ];

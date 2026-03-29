@@ -9,6 +9,7 @@ use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecommendationsController;
+use App\Http\Controllers\AdminController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -35,5 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('recommendations', [RecommendationsController::class, 'index']);
     Route::post('recommendations/{plat_id}', [RecommendationsController::class, 'store']);
     Route::get('recommendations/{plat_id}', [RecommendationsController::class, 'show']);
+    Route::get('admin/stats', [AdminController::class, 'stats']);
 
 });

@@ -73,6 +73,6 @@ class User extends Authenticatable
     }
 
     public function recommendation(){
-        return $this->hasMany(Recommendations::class);
+        return $this->hasMany(Recommendations::class , 'plat_id');
     }
 }
